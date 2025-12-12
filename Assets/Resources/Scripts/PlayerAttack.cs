@@ -22,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
+        if (lifes == 0) return;
         if (GameManager.Instance.gameState == GameManager.State.End) return;
         
         //Get any key
