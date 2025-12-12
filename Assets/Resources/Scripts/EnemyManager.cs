@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -8,8 +10,13 @@ public class EnemyManager : MonoBehaviour
     public List<Enemy> Enemies { get; private set; } = new List<Enemy>();
     public Enemy CurrentEnemy { get; private set; }
 
+    public TextMeshProUGUI roundText;
+
     //Stats
-    private int _currentKills = 0;
+    public int currentRound = 1;
+    public int currentKills = 0;
+    public int totalKills = 0;
+    public int killsToRound = 5;
     public float currentSpeedMultiplier = 1f;
 
     //Spawns
@@ -30,7 +37,7 @@ public class EnemyManager : MonoBehaviour
         }
         Instance = this;
         CurrentEnemy = null;
-        StartCoroutine(SpawnEnemy());
+
     }
     public void AddEnemy(Enemy enemy)
     {
@@ -47,11 +54,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if(CurrentEnemy == null && Enemies.Count != 0)
@@ -60,11 +62,23 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void ActivateEnemyManager() //from game manager
+    {
+        StartCoroutine(SpawnEnemy());
+        roundText.text = "Round: " + currentRound.ToString();
+    }
+
     public void NextRound()
     {
-        _cooldownSpawn -= 0.2f;
-        if (_cooldownSpawn < 0.2f) _cooldownSpawn = 0.2f;
+        Debug.Log("Se pasa de ronda");
+        _cooldownSpawn -= 0.5f;
+        if (_cooldownSpawn < 0.8f) _cooldownSpawn = 0.8f;
         currentSpeedMultiplier += 0.2f;
+
+        currentKills = 0;
+        killsToRound = Random.Range(4, 7); //next round target kills become random
+        currentRound++;
+        roundText.text = "Round: " + currentRound.ToString();
     }
 
     private IEnumerator SpawnEnemy()

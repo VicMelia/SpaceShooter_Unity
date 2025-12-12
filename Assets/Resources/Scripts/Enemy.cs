@@ -37,11 +37,16 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Awake()
     {
-        EnemyManager.Instance.AddEnemy(this);
         SetupWord();
-        UpdateWordText();
+        if(EnemyManager.Instance.Enemies.Count == 0) UpdateWordText(); //initial enemy with yellow text
+        EnemyManager.Instance.AddEnemy(this);
         _speed += EnemyManager.Instance.currentSpeedMultiplier; //adds new speed if higher rounds
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    protected virtual void Update()
+    {
+        CheckBounds();
     }
 
     protected virtual void FixedUpdate()
@@ -67,10 +72,13 @@ public class Enemy : MonoBehaviour
         currentIndex++;
         if(currentIndex > currentWord.Length-1)
         {
-            //TODO: Word count game manager + 1
-            //Comrpobar si se pasa de ronda con %
-            EnemyManager.Instance.RemoveEnemy(this);
-            Destroy(gameObject);
+            EnemyManager.Instance.currentKills++;
+            EnemyManager.Instance.totalKills++;
+            if (EnemyManager.Instance.currentKills % EnemyManager.Instance.killsToRound == 0)
+            {
+                EnemyManager.Instance.NextRound();
+            }
+            DestroyEnemy();
         }
         UpdateWordText();
     }
@@ -90,5 +98,26 @@ public class Enemy : MonoBehaviour
         {
             _enemyText.text = "";
         }
+    }
+
+    private void CheckBounds() //Kills enemy if out of bounds
+    {
+        Vector3 pos = transform.position;
+
+        if (pos.x < -6.22f || pos.x > 6f || pos.y > 4f || pos.y < -4f)
+        {
+            DestroyEnemy();
+        }
+    }
+
+    private void DestroyEnemy()
+    {
+        EnemyManager.Instance.RemoveEnemy(this);
+
+        if (EnemyManager.Instance.Enemies.Count > 0)
+        {
+            EnemyManager.Instance.Enemies[0].UpdateWordText(); //new enemy as current (yellow text)
+        }
+        Destroy(gameObject);
     }
 }

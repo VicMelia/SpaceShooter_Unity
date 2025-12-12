@@ -12,7 +12,6 @@ public class Projectile : MonoBehaviour
     private Vector2 _moveDirection;
     private float _speed = 15f;
     private float _rotationSpeed = 360f;
-    private bool _enabled = true;
     private bool _failed = false;
     private float _lifeTime = 3f;
 
