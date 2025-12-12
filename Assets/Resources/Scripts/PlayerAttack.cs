@@ -22,6 +22,8 @@ public class PlayerAttack : MonoBehaviour
     }
     private void Update()
     {
+        if (GameManager.Instance.gameState == GameManager.State.End) return;
+        
         //Get any key
         for (KeyCode key = KeyCode.A; key <= KeyCode.Z; key++)
         {

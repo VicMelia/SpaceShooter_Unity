@@ -5,18 +5,6 @@ TextureImporter:
   - first:
       213: 4774802094714156286
     second: paperLife_0
-  - first:
-      213: -1091384525914339080
-    second: paperLife_1
-  - first:
-      213: -2304272977045786564
-    second: paperLife_2
-  - first:
-      213: 7739282532263259448
-    second: paperLife_3
-  - first:
-      213: -7491129132763246483
-    second: paperLife_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -141,10 +129,10 @@ TextureImporter:
       name: paperLife_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 613
-        width: 13
-        height: 13
+        x: 83
+        y: 172
+        width: 390
+        height: 323
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,94 +143,6 @@ TextureImporter:
       bones: []
       spriteID: ef47a380531834240800000000000000
       internalID: 4774802094714156286
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paperLife_1
-      rect:
-        serializedVersion: 2
-        x: 613
-        y: 613
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 8f8848b5e8f9ad0f0800000000000000
-      internalID: -1091384525914339080
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paperLife_2
-      rect:
-        serializedVersion: 2
-        x: 91
-        y: 156
-        width: 374
-        height: 307
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c3077a99fe39500e0800000000000000
-      internalID: -2304272977045786564
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paperLife_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83defe76574776b60800000000000000
-      internalID: 7739282532263259448
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paperLife_4
-      rect:
-        serializedVersion: 2
-        x: 613
-        y: 0
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d6011135eb92a0890800000000000000
-      internalID: -7491129132763246483
       vertices: []
       indices: 
       edges: []
@@ -262,10 +162,6 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       paperLife_0: 4774802094714156286
-      paperLife_1: -1091384525914339080
-      paperLife_2: -2304272977045786564
-      paperLife_3: 7739282532263259448
-      paperLife_4: -7491129132763246483
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

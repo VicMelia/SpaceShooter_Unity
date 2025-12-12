@@ -1358,10 +1358,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7128860012530989183, guid: cbf960fec1dc8e94ab94db1f0595a44b, type: 3}
-      propertyPath: _shotClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f83d1f38161dccd4aa26ff7d9a10b8d4, type: 3}
     - target: {fileID: 7288956569191718381, guid: cbf960fec1dc8e94ab94db1f0595a44b, type: 3}
       propertyPath: m_Name
       value: Player

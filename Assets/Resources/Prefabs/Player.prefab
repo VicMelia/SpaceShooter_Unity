@@ -289,6 +289,8 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 8642068503679959243, guid: 6324c2ecbceb8a34998834bfbf842a75, type: 3}
   _firePoint: {fileID: 7239584132664620855}
   _getDamageClip: {fileID: 8300000, guid: 12f245cee73880a4b964e6e74ff45747, type: 3}
+  _shotClip: {fileID: 8300000, guid: f83d1f38161dccd4aa26ff7d9a10b8d4, type: 3}
+  lifes: 3
 --- !u!1 &7650798597619435771
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +370,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 8550740979695159376, guid: 249745da22ac5384bb0fb0eaf03e8c71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
