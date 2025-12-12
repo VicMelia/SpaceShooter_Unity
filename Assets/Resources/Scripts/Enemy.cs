@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -34,6 +35,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _speed = 5f;
     protected Rigidbody2D _rb;
 
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float minShootTime = 1.5f;
+    [SerializeField] private float maxShootTime = 4f;
+
+    private Coroutine shootCoroutine;
+    protected Vector2 movementVector = Vector2.zero;
+    [SerializeField] ParticleSystem _particleSystem;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Awake()
     {
@@ -42,6 +52,8 @@ public class Enemy : MonoBehaviour
         EnemyManager.Instance.AddEnemy(this);
         _speed += EnemyManager.Instance.currentSpeedMultiplier; //adds new speed if higher rounds
         _rb = GetComponent<Rigidbody2D>();
+        shootCoroutine = StartCoroutine(ShootCoroutine());
+        movementVector = Vector2.left;
     }
 
     protected virtual void Update()
@@ -51,7 +63,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        _rb.linearVelocity = Vector2.left * _speed;
+        if (GameManager.Instance.gameState == GameManager.State.End) _rb.linearVelocity = Vector2.zero;
+        else _rb.linearVelocity = movementVector * _speed;
     }
 
     private void SetupWord()
@@ -112,6 +125,7 @@ public class Enemy : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        if (shootCoroutine != null) StopCoroutine(shootCoroutine);
         EnemyManager.Instance.RemoveEnemy(this);
 
         if (EnemyManager.Instance.Enemies.Count > 0)
@@ -119,5 +133,38 @@ public class Enemy : MonoBehaviour
             EnemyManager.Instance.Enemies[0].UpdateWordText(); //new enemy as current (yellow text)
         }
         Destroy(gameObject);
+    }
+
+    private IEnumerator ShootCoroutine()
+    {
+        while (true)
+        {
+            float waitTime = Random.Range(minShootTime, maxShootTime);
+            yield return new WaitForSeconds(waitTime);
+
+            Shoot();
+        }
+    }
+
+    private void Shoot()
+    {
+        if (GameManager.Instance.gameState == GameManager.State.End) return;
+        if (bulletPrefab == null || firePoint == null) return;
+
+        var bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        if (bullet.TryGetComponent<EnemyProjectile>(out EnemyProjectile b))
+        {
+            b.SetMovementVector(movementVector);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerAttack>().GetDamage();
+            Instantiate(_particleSystem, transform.position, Quaternion.identity);
+            DestroyEnemy();
+        }
     }
 }

@@ -80,14 +80,11 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-
-
     private void FailProjectile()
     {
         _failed = true;
-        TrailRenderer tr = GetComponentInChildren<TrailRenderer>();
-        tr.enabled = false;
+        //TrailRenderer tr = GetComponentInChildren<TrailRenderer>();
+        //tr.enabled = false;
         _rb.gravityScale = 1f;
 
         Vector2 parabolic = new Vector2( //x,y impulse

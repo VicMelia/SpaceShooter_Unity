@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.15311918
       objectReference: {fileID: 0}
+    - target: {fileID: 2558549284667062224, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.086
+      objectReference: {fileID: 0}
+    - target: {fileID: 2558549284667062224, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.643
+      objectReference: {fileID: 0}
     - target: {fileID: 2696290154208887036, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
       propertyPath: m_Name
       value: EnemyVertical Variant
@@ -174,3 +182,13 @@ MonoBehaviour:
   wordChars: 
   currentIndex: 0
   _speed: 0.1
+  bulletPrefab: {fileID: 2813270343221586777, guid: 90402ebe6b3e95047b265f1b62b50a26, type: 3}
+  firePoint: {fileID: 4331692720970750104}
+  minShootTime: 1.5
+  maxShootTime: 4
+  _particleSystem: {fileID: 124773296752663143, guid: 2caf189846c6b9a42be577e6a36b1ced, type: 3}
+--- !u!4 &4331692720970750104 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2558549284667062224, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
+  m_PrefabInstance: {fileID: 2277845666039574344}
+  m_PrefabAsset: {fileID: 0}

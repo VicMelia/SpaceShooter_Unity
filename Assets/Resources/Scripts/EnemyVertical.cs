@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class EnemyVertical : Enemy
 {
+
+    protected override void Awake()
+    {
+        base.Awake();
+        movementVector = Vector2.down;
+    }
     protected override void FixedUpdate()
     {
-        _rb.linearVelocity = Vector2.down * _speed;
+        _rb.linearVelocity = movementVector * _speed;
     }
 }

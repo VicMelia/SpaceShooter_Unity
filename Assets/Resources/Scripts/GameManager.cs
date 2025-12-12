@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class GameManager : MonoBehaviour
     public CanvasGroup blackCanvas;
     public CanvasGroup introCanvas;
     public CanvasGroup hudCanvas;
+    public CanvasGroup endCanvas;
+    public TextMeshProUGUI killText;
 
     public enum State
     {
@@ -28,7 +32,6 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
         Cursor.visible = false;
         StartCoroutine(FadeCanvas(blackCanvas, 1f, 0f));
     }
@@ -45,6 +48,13 @@ public class GameManager : MonoBehaviour
                 FadeIn(hudCanvas);
                 EnemyManager.Instance.ActivateEnemyManager();
 
+            }
+        }
+        else if (gameState == State.End)
+        {
+            if (Input.anyKeyDown)
+            {
+                StartCoroutine(RestartSequence());
             }
         }
 
@@ -78,5 +88,29 @@ public class GameManager : MonoBehaviour
 
         group.alpha = end;
 
+    }
+
+    public void FinishGame()
+    {
+        StartCoroutine(FinishGameSequence());
+    }
+
+    private IEnumerator FinishGameSequence()
+    {
+        FindAnyObjectByType<PlayerMovement>().GetComponentInChildren<SpriteRenderer>().enabled = false;
+        FindAnyObjectByType<PlayerMovement>().GetComponentInChildren<TrailRenderer>().enabled = false;
+        killText.text = "WORDS KILLED: " + EnemyManager.Instance.totalKills.ToString();
+        //Time.timeScale = 0f;
+        blackCanvas.alpha = 0f;
+        endCanvas.alpha = 0f;
+        yield return StartCoroutine(FadeCanvas(blackCanvas, 0f, 1f));
+        yield return StartCoroutine(FadeCanvas(endCanvas, 0f, 1f));
+        gameState = State.End;
+    }
+
+    private IEnumerator RestartSequence()
+    {
+        yield return StartCoroutine(FadeCanvas(endCanvas, 1f, 0f));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -113,6 +113,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2350465292447420986}
   m_SourcePrefab: {fileID: 100100000, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
+--- !u!4 &6489640194810967648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2558549284667062224, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
+  m_PrefabInstance: {fileID: 8758971703203529136}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6693822148955603276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2696290154208887036, guid: 8fd9061d73ec489459122755e24f8c76, type: 3}
@@ -134,3 +139,8 @@ MonoBehaviour:
   wordChars: 
   currentIndex: 0
   _speed: 0.1
+  bulletPrefab: {fileID: 2813270343221586777, guid: 2840ba4b18817364e99add0513e46d26, type: 3}
+  firePoint: {fileID: 6489640194810967648}
+  minShootTime: 1.5
+  maxShootTime: 4
+  _particleSystem: {fileID: 124773296752663143, guid: 0f34f2dde8190624996e41fed1af9589, type: 3}

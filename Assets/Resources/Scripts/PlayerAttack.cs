@@ -6,6 +6,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _firePoint;
 
+    private int _lifes = 3;
+
     // Update is called once per frame
     private void Update()
     {
@@ -29,6 +31,15 @@ public class PlayerAttack : MonoBehaviour
         {
             projectile.SetTarget(EnemyManager.Instance.CurrentEnemy.transform);
             projectile.SetCharacter(letter);
+        }
+    }
+
+    public void GetDamage()
+    {
+        _lifes--;
+        if(_lifes == 0)
+        {
+            GameManager.Instance.FinishGame();
         }
     }
 }
