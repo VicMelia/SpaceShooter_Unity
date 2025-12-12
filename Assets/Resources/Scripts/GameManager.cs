@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
         //Time.timeScale = 0f;
         blackCanvas.alpha = 0f;
         endCanvas.alpha = 0f;
+        SFXManager.Instance.PlayGameOverSFX();
         yield return StartCoroutine(FadeCanvas(blackCanvas, 0f, 1f));
         yield return StartCoroutine(FadeCanvas(endCanvas, 0f, 1f));
         gameState = State.End;

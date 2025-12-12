@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _explosionParticle: {fileID: 8005613560757082885, guid: d3205e2ce8560244182e4cd6e12da300, type: 3}
+  _wrongShotClip: {fileID: 8300000, guid: e668aff411bad7741bb82a00b5c74c88, type: 3}
 --- !u!50 &5496961678345104102
 Rigidbody2D:
   serializedVersion: 5

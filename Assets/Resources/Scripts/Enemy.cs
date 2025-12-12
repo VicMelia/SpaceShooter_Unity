@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float minShootTime = 1.5f;
-    [SerializeField] private float maxShootTime = 4f;
+    [SerializeField] private float maxShootTime = 2.25f;
 
     private Coroutine shootCoroutine;
     protected Vector2 movementVector = Vector2.zero;

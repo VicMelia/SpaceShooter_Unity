@@ -141,6 +141,6 @@ MonoBehaviour:
   _speed: 0.1
   bulletPrefab: {fileID: 2813270343221586777, guid: 2840ba4b18817364e99add0513e46d26, type: 3}
   firePoint: {fileID: 6489640194810967648}
-  minShootTime: 1.5
-  maxShootTime: 4
+  minShootTime: 0.5
+  maxShootTime: 2
   _particleSystem: {fileID: 124773296752663143, guid: 0f34f2dde8190624996e41fed1af9589, type: 3}

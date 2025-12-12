@@ -12,6 +12,8 @@ public class EnemyManager : MonoBehaviour
 
     public TextMeshProUGUI roundText;
 
+    [SerializeField] private AudioClip _roundAudioClip;
+
     //Stats
     public int currentRound = 1;
     public int currentKills = 0;
@@ -20,13 +22,16 @@ public class EnemyManager : MonoBehaviour
     public float currentSpeedMultiplier = 1f;
 
     //Spawns
-    private float _cooldownSpawn = 5f;
+    private float _cooldownSpawn = 3.5f;
     [SerializeField] private GameObject _enemy1;
     [SerializeField] private GameObject _enemy2;
     [SerializeField] private GameObject _enemy3;
     [SerializeField] private Transform _horizontalSpawns;
     [SerializeField] private Transform _verticalSpawns;
     [SerializeField] private Transform _diagonalSpawns;
+    [SerializeField] private GameObject _healItemPrefab;
+    [SerializeField] private float _healMinTime = 20f;
+    [SerializeField] private float _healMaxTime = 30f;
 
     void Awake()
     {
@@ -65,13 +70,15 @@ public class EnemyManager : MonoBehaviour
     public void ActivateEnemyManager() //from game manager
     {
         StartCoroutine(SpawnEnemy());
+        StartCoroutine(SpawnHealItem());
         roundText.text = "Round: " + currentRound.ToString();
     }
 
     public void NextRound()
     {
+        SFXManager.Instance.PlaySFX(_roundAudioClip, transform.position, 0.8f);
         Debug.Log("Se pasa de ronda");
-        _cooldownSpawn -= 0.5f;
+        _cooldownSpawn -= 0.25f;
         if (_cooldownSpawn < 0.8f) _cooldownSpawn = 0.8f;
         currentSpeedMultiplier += 0.2f;
 
@@ -116,5 +123,19 @@ public class EnemyManager : MonoBehaviour
         int count = spawnParent.childCount;
         int r = Random.Range(0, count);
         return spawnParent.GetChild(r);
+    }
+    private IEnumerator SpawnHealItem()
+    {
+        while (true)
+        {
+            float t = Random.Range(_healMinTime, _healMaxTime);
+            yield return new WaitForSeconds(t);
+
+            if (_healItemPrefab != null && _horizontalSpawns != null && _horizontalSpawns.childCount > 0)
+            {
+                Transform spawn = GetRandomSpawn(_horizontalSpawns);
+                Instantiate(_healItemPrefab, spawn.position, Quaternion.identity);
+            }
+        }
     }
 }

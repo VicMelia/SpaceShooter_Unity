@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private GameObject _explosionParticle;
+    [SerializeField] private AudioClip _wrongShotClip;
     private TextMeshPro _bulletText;
     private Transform _enemyTarget;
     private Rigidbody2D _rb;
@@ -71,6 +72,8 @@ public class Projectile : MonoBehaviour
             }
             else
             {
+                if (GameManager.Instance.gameState == GameManager.State.End) return; 
+                SFXManager.Instance.PlaySFX(_wrongShotClip, transform.position, 0.25f);
                 FailProjectile();
             }
 

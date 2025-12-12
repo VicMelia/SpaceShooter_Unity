@@ -184,8 +184,8 @@ MonoBehaviour:
   _speed: 0.1
   bulletPrefab: {fileID: 2813270343221586777, guid: 90402ebe6b3e95047b265f1b62b50a26, type: 3}
   firePoint: {fileID: 4331692720970750104}
-  minShootTime: 1.5
-  maxShootTime: 4
+  minShootTime: 0.5
+  maxShootTime: 2
   _particleSystem: {fileID: 124773296752663143, guid: 2caf189846c6b9a42be577e6a36b1ced, type: 3}
 --- !u!4 &4331692720970750104 stripped
 Transform:

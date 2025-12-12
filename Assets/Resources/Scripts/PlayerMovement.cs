@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.gameState != GameManager.State.Playing) return;
         _verticalInput = 0f;
         _horizontalInput = 0f;
         float rotDegrees = 0f;
@@ -34,12 +35,20 @@ public class PlayerMovement : MonoBehaviour
             rotDegrees = -ROT_DEGREES;
         }
 
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, rotDegrees);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
-
         // Horizontal movement
-        if (Input.GetKey(KeyCode.RightArrow)) _horizontalInput = 1f;
-        else if (Input.GetKey(KeyCode.LeftArrow)) _horizontalInput = -1f;
+        float xRot = 0f;
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            _horizontalInput = 1f;
+            xRot = 0f;
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            _horizontalInput = -1f;
+            xRot = 180f;
+        }
+        Quaternion targetRotation = Quaternion.Euler(0f, xRot, rotDegrees);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
 
     }
 
