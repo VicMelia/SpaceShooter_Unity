@@ -77,7 +77,6 @@ public class EnemyManager : MonoBehaviour
     public void NextRound()
     {
         SFXManager.Instance.PlaySFX(_roundAudioClip, transform.position, 0.8f);
-        Debug.Log("Se pasa de ronda");
         _cooldownSpawn -= 0.25f;
         if (_cooldownSpawn < 0.8f) _cooldownSpawn = 0.8f;
         currentSpeedMultiplier += 0.2f;
