@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,19 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager Instance { get; private set; }
     public List<Enemy> Enemies { get; private set; } = new List<Enemy>();
     public Enemy CurrentEnemy { get; private set; }
+
+    //Stats
+    private int _currentKills = 0;
+    public float currentSpeedMultiplier = 1f;
+
+    //Spawns
+    private float _cooldownSpawn = 5f;
+    [SerializeField] private GameObject _enemy1;
+    [SerializeField] private GameObject _enemy2;
+    [SerializeField] private GameObject _enemy3;
+    [SerializeField] private Transform _horizontalSpawns;
+    [SerializeField] private Transform _verticalSpawns;
+    [SerializeField] private Transform _diagonalSpawns;
 
     void Awake()
     {
@@ -16,6 +30,7 @@ public class EnemyManager : MonoBehaviour
         }
         Instance = this;
         CurrentEnemy = null;
+        StartCoroutine(SpawnEnemy());
     }
     public void AddEnemy(Enemy enemy)
     {
@@ -45,4 +60,47 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public void NextRound()
+    {
+        _cooldownSpawn -= 0.2f;
+        if (_cooldownSpawn < 0.2f) _cooldownSpawn = 0.2f;
+        currentSpeedMultiplier += 0.2f;
+    }
+
+    private IEnumerator SpawnEnemy()
+    {
+        float cd = Random.Range(_cooldownSpawn - 0.2f, _cooldownSpawn);
+        yield return new WaitForSeconds(cd);
+        Spawn();
+        StartCoroutine(SpawnEnemy());
+    }
+
+    private void Spawn()
+    {
+        int r = Random.Range(0, 3);
+        GameObject prefabToSpawn = null;
+        Transform spawnTransform = null;
+        switch (r)
+        {
+            case 0:
+                prefabToSpawn = _enemy1;
+                spawnTransform = GetRandomSpawn(_horizontalSpawns);
+                break;
+            case 1:
+                prefabToSpawn = _enemy2;
+                spawnTransform = GetRandomSpawn(_verticalSpawns);
+                break;
+            case 2:
+                prefabToSpawn = _enemy3;
+                spawnTransform = GetRandomSpawn(_diagonalSpawns);
+                break;
+        }
+        Instantiate(prefabToSpawn, spawnTransform.position, Quaternion.identity);
+    }
+    private Transform GetRandomSpawn(Transform spawnParent)
+    {
+        int count = spawnParent.childCount;
+        int r = Random.Range(0, count);
+        return spawnParent.GetChild(r);
+    }
 }

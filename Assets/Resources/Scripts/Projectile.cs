@@ -91,11 +91,10 @@ public class Projectile : MonoBehaviour
         tr.enabled = false;
         _rb.gravityScale = 1f;
 
-        Vector2 parabolic = new Vector2(
-            Random.Range(-2f, -1f),    // impulso horizontal aleatorio
-            Random.Range(4f, 7f)      // impulso hacia arriba
+        Vector2 parabolic = new Vector2( //x,y impulse
+            Random.Range(-2f, -1f),    
+            Random.Range(4f, 5f)      
         );
-
         _rb.linearVelocity = parabolic;
 
     }

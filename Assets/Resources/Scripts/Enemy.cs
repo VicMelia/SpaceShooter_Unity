@@ -4,24 +4,49 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private string[] _enemyWords = { "hola", "adios", "wtf", "edward" };
+    private string[] _enemyWords = 
+    {
+        "apple", "river", "shadow", "planet", "mirror",
+        "stone", "breeze", "flower", "light", "forest",
+        "mountain", "silver", "cloud", "dream", "energy",
+        "motion", "crystal", "flame", "whisper", "golden",
+        "night", "storm", "jelly", "ocean", "spirit",
+        "bridge", "tiger", "neon", "pulse", "echo",
+        "drift", "thunder", "cosmic", "arrow", "frost",
+        "comet", "blaze", "marble", "vision", "spark",
+        "gravity", "star", "bloom", "phantom", "valley",
+        "orbit", "flare", "wave", "ember", "lantern",
+        "quake", "solar", "anchor", "mist", "glide",
+        "lotus", "prism", "sonic", "nova", "spiral",
+        "gleam", "arcane", "dusk", "hollow", "sky",
+        "stream", "radiant", "ripple", "tide", "lunar",
+        "echoes", "blaze", "motion", "crystal", "ember",
+        "spark", "shadow", "frost", "dune", "ripple",
+        "phantom", "glow", "crystal", "ember", "pulse",
+        "whisper", "blaze", "tide", "motion", "drift",
+        "lunar", "sky", "blaze", "crystal", "spark",
+        "shadow"
+    };
     private TextMeshPro _enemyText;
     public string currentWord;
     public char[] wordChars;
     public int currentIndex = 0;
+    [SerializeField] protected float _speed = 5f;
+    protected Rigidbody2D _rb;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Awake()
+    protected virtual void Awake()
     {
         EnemyManager.Instance.AddEnemy(this);
         SetupWord();
         UpdateWordText();
+        _speed += EnemyManager.Instance.currentSpeedMultiplier; //adds new speed if higher rounds
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    private void Update()
+    protected virtual void FixedUpdate()
     {
-        
+        _rb.linearVelocity = Vector2.left * _speed;
     }
 
     private void SetupWord()
